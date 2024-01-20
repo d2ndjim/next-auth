@@ -49,7 +49,7 @@ export const LoginForm = () => {
     setSuccess('');
 
     startTransition(() => {
-      login(values, callbackUrl)
+      login(values)
         .then((data) => {
           if (data?.error) {
             form.reset();
@@ -61,9 +61,9 @@ export const LoginForm = () => {
             setSuccess(data.success);
           }
 
-          if (data?.twoFactor) {
-            setShowTwoFactor(true);
-          }
+          //         if (data?.twoFactor) {
+          //           setShowTwoFactor(true);
+          //         }
         })
         .catch(() => setError('Something went wrong'));
     });
