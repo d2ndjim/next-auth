@@ -49,24 +49,13 @@ export const LoginForm = () => {
     setSuccess('');
 
     startTransition(() => {
-      login(values)
-        .then((data) => {
-          if (data?.error) {
-            form.reset();
-            setError(data.error);
-          }
-
-          if (data?.success) {
-            form.reset();
-            setSuccess(data.success);
-          }
-
-          //         if (data?.twoFactor) {
-          //           setShowTwoFactor(true);
-          //         }
-        })
-        .catch(() => setError('Something went wrong'));
+      login(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
     });
+
+    
   };
 
   return (
@@ -147,7 +136,7 @@ export const LoginForm = () => {
               </>
             )}
           </div>
-          <FormError message={error || urlError} />
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
             {showTwoFactor ? 'Confirm' : 'Login'}
