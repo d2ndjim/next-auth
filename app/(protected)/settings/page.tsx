@@ -1,10 +1,12 @@
-import { signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
 
 const Settings = async () => {
+  const session = await auth();
+  session?.user.role;
   return (
     <div>
-      <h1>Settings</h1>
+      <h1>{JSON.stringify(session)}</h1>
       <form action={async () => {
         "use server"
         await signOut()
